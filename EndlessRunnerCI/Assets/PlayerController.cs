@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Unity.Input;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public GameObjects[] lanes;
+    public GameObject[] lanes;
     public int currentLane;
 
     // Start is called before the first frame update
@@ -17,6 +16,21 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown()) ;
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            if (currentLane > 1)
+            {
+                currentLane--;
+                transform.position = lanes[currentLane - 1].transform.position;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            if (currentLane < lanes.Length)
+            {
+                currentLane++;
+                transform.position = lanes[currentLane - 1].transform.position;
+            }
+        }
     }
 }
