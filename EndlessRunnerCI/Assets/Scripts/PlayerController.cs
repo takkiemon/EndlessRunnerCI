@@ -33,7 +33,6 @@ public class PlayerController : MonoBehaviour
                 moving = true;
                 moveTimer = 0f;
             }
-            //UpdatePoints(++points);
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
@@ -43,7 +42,6 @@ public class PlayerController : MonoBehaviour
                 moving = true;
                 moveTimer = 0f;
             }
-            //UpdatePoints(++points);
         }
 
         if (moving)
