@@ -20,14 +20,19 @@ public class ItemCatcherBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!conveyorBelt.inactiveItems.Contains(other.gameObject))
+        RemoveItemFromConveyorBelt(other.gameObject);
+    }
+
+    public void RemoveItemFromConveyorBelt(GameObject itemToRemove)
+    {
+        if (!conveyorBelt.inactiveItems.Contains(itemToRemove))
         {
-            conveyorBelt.inactiveItems.Add(other.gameObject);
+            conveyorBelt.inactiveItems.Add(itemToRemove);
         }
-        if (conveyorBelt.itemsOnTheBelt.Contains(other.gameObject))
+        if (conveyorBelt.itemsOnTheBelt.Contains(itemToRemove))
         {
-            conveyorBelt.itemsOnTheBelt.Remove(other.gameObject);
+            conveyorBelt.itemsOnTheBelt.Remove(itemToRemove);
         }
-        other.gameObject.transform.position = new Vector3(other.gameObject.transform.position.x, other.gameObject.transform.position.y + transform.localScale.y + transform.position.y + 2, other.gameObject.transform.position.z - transform.localScale.z + transform.position.z - 2);
+        itemToRemove.transform.position = new Vector3(itemToRemove.transform.position.x, itemToRemove.transform.position.y + transform.localScale.y + transform.position.y + 2, itemToRemove.transform.position.z - transform.localScale.z + transform.position.z - 2);
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public GameObject[] lanes;
+    public ItemCatcherBehavior itemCatcher;
     public int currentLane;
     public int points;
     public bool moving;
@@ -65,5 +66,11 @@ public class PlayerController : MonoBehaviour
     {
         this.points = points;
         scoreText.text = points.ToString();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        itemCatcher.RemoveItemFromConveyorBelt(other.gameObject);
+        UpdatePoints(++points);
     }
 }
