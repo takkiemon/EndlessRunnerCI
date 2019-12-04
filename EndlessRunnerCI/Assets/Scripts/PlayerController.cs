@@ -9,15 +9,18 @@ public class PlayerController : MonoBehaviour
     public ItemCatcherBehavior itemCatcher;
     public int currentLane;
     public int points;
+    public int lives;
     public bool moving;
     public float moveTimer;
     public float timeToMove;
     public Text scoreText;
+    public Text livesText;
 
     // Start is called before the first frame update
     void Start()
     {
         points = 0;
+        lives = 3; 
         currentLane = 2;
         moveTimer = 0f;
         timeToMove = 1.5f;
@@ -68,9 +71,26 @@ public class PlayerController : MonoBehaviour
         scoreText.text = points.ToString();
     }
 
+    public void UpdateLives(int lives)
+    {
+        this.lives = lives;
+        livesText.text = lives.ToString();
+        if (lives <= 0)
+        {
+            Debug.Log("You are dead.");
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         itemCatcher.RemoveItemFromConveyorBelt(other.gameObject);
-        UpdatePoints(++points);
+        if (other.gameObject.GetComponent<CoinBehavior>())
+        {
+            UpdatePoints(++points);
+        }
+        if (other.gameObject.GetComponent<WallBehavior>())
+        {
+            UpdateLives(--lives);
+        }
     }
 }
