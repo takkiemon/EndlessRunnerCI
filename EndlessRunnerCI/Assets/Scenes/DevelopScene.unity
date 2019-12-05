@@ -2958,7 +2958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ecf9fad8e7ace5418a26effc2e6f04b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingSpeed: 0.8
+  movingSpeed: 0.2
   spawnType: 0
   spawnNumber: 0
   itemLanes:
