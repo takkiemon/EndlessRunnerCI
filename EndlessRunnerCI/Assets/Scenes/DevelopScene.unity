@@ -5533,6 +5533,11 @@ PrefabInstance:
       propertyPath: livesText
       value: 
       objectReference: {fileID: 17657852}
+    - target: {fileID: 6695237333096382630, guid: d6c64068c2aac2c4b9ad78d36cfc2a34,
+        type: 3}
+      propertyPath: timeToMove
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6c64068c2aac2c4b9ad78d36cfc2a34, type: 3}
 --- !u!1001 &7290098618950530192

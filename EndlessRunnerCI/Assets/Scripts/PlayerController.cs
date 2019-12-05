@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     public Text scoreText;
     public Text livesText;
 
+    private Vector3 previousPosition;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +25,6 @@ public class PlayerController : MonoBehaviour
         lives = 3; 
         currentLane = 2;
         moveTimer = 0f;
-        timeToMove = 1.5f;
     }
 
     // Update is called once per frame
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
                 currentLane--;
                 moving = true;
                 moveTimer = 0f;
+                previousPosition = transform.position;
             }
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -45,16 +47,17 @@ public class PlayerController : MonoBehaviour
                 currentLane++;
                 moving = true;
                 moveTimer = 0f;
+                previousPosition = transform.position;
             }
         }
 
         if (moving)
         {
-            MovePlayerSlerp(transform.position, lanes[currentLane - 1].transform.position);
+            MovePlayerLerp(lanes[currentLane - 1].transform.position);
         }
     }
 
-    public void MovePlayerSlerp(Vector3 startingPosition, Vector3 finishingPosition)
+    public void MovePlayerLerp(Vector3 finishingPosition)
     {
         moveTimer += Time.deltaTime / timeToMove;
         if (moveTimer >= 1f)
@@ -62,7 +65,7 @@ public class PlayerController : MonoBehaviour
             moving = false;
             moveTimer = 1f;
         }
-        transform.position = Vector3.Lerp(startingPosition, finishingPosition, moveTimer);
+        transform.position = Vector3.Lerp(previousPosition, finishingPosition, moveTimer);
     }
 
     public void UpdatePoints(int points)
