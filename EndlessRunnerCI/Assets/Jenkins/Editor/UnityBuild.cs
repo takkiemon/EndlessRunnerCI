@@ -94,10 +94,10 @@ public class UnityBuild
 	 * 
 	 * DriveTempDirectory and DriveDirectory should be changed for your own paths!
 	 */
-	private static readonly string DriveTempDirectory = "A:/Users/Tak Man/Documents";
+	private static readonly string DriveTempDirectory = "A:/JenkinsStuff/Documents";
 	private static readonly string DriveTempFolderName = "JenkinsTemp";
 
-	private static readonly string DriveDirectory = "A:/Users/Carl/Google Drive";
+	private static readonly string DriveDirectory = "A:/JenkinsStuff/GoogleDrive";
 	private static readonly string DriveFolderName = "Jenkins";
 
 	private static string DriveBuildLocation     => Path.Combine(DriveDirectory, DriveFolderName);
