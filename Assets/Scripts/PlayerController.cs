@@ -32,23 +32,11 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if (!moving && currentLane > 1)
-            {
-                currentLane--;
-                moving = true;
-                moveTimer = 0f;
-                previousPosition = transform.position;
-            }
+            PressLeft();
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (!moving && currentLane < lanes.Length)
-            {
-                currentLane++;
-                moving = true;
-                moveTimer = 0f;
-                previousPosition = transform.position;
-            }
+            PressRight();
         }
 
         if (moving)
@@ -94,6 +82,28 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.GetComponent<WallBehavior>())
         {
             UpdateLives(--lives);
+        }
+    }
+
+    public void PressLeft()
+    {
+        if (!moving && currentLane > 1)
+        {
+            currentLane--;
+            moving = true;
+            moveTimer = 0f;
+            previousPosition = transform.position;
+        }
+    }
+
+    public void PressRight()
+    {
+        if (!moving && currentLane < lanes.Length)
+        {
+            currentLane++;
+            moving = true;
+            moveTimer = 0f;
+            previousPosition = transform.position;
         }
     }
 }
