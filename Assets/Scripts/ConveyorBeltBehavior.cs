@@ -27,7 +27,7 @@ public class ConveyorBeltBehavior : MonoBehaviour
         }
     }
 
-    public void SpawnSomething()
+    public GameObject SpawnSomething()
     {
         spawnType = Random.Range(0f, coinSpawnWeight + wallSpawnWeight);
         if (spawnType <= coinSpawnWeight)
@@ -39,24 +39,25 @@ public class ConveyorBeltBehavior : MonoBehaviour
             spawnNumber = 2;
         }
 
-        int lane = Random.Range(1, 4);
+        int lane = Random.Range(1, 3);
         switch(spawnNumber)
         {
             case 0:
                 //do nothing;
                 break;
             case 1:
-                SpawnCoin(lane);
+                return SpawnCoin(lane);
                 break;
             case 2:
-                SpawnWall(lane);
+                return SpawnWall(lane);
                 break;
             default:
                 break;
         }
+        return null;
     }
 
-    public void SpawnCoin(int lane)
+    public GameObject SpawnCoin(int lane)
     {
         foreach(GameObject currentObject in inactiveItems)
         {
@@ -65,7 +66,7 @@ public class ConveyorBeltBehavior : MonoBehaviour
                 itemsOnTheBelt.Add(currentObject);
                 inactiveItems.Remove(currentObject);
                 currentObject.transform.position = itemLanes[lane - 1].transform.position;
-                return;
+                return currentObject;
             }
         }
 
@@ -74,13 +75,14 @@ public class ConveyorBeltBehavior : MonoBehaviour
             if (currentObject.GetComponent<CoinBehavior>())
             {
                 currentObject.transform.position = itemLanes[lane - 1].transform.position;
-                return;
+                return currentObject;
             }
         }
         Debug.Log("the inactiveItems and itemsOnTheBelt lists both do not contain any objects with the 'Coinbehavior.cs' component: there are no coins in the game or the 'SpawnCoin' function doesn't work properly");
+        return null;
     }
 
-    public void SpawnWall(int lane)
+    public GameObject SpawnWall(int lane)
     {
         foreach (GameObject currentObject in inactiveItems)
         {
@@ -89,7 +91,7 @@ public class ConveyorBeltBehavior : MonoBehaviour
                 itemsOnTheBelt.Add(currentObject);
                 inactiveItems.Remove(currentObject);
                 currentObject.transform.position = itemLanes[lane - 1].transform.position;
-                return;
+                return currentObject;
             }
         }
 
@@ -98,9 +100,10 @@ public class ConveyorBeltBehavior : MonoBehaviour
             if (currentObject.GetComponent<WallBehavior>())
             {
                 currentObject.transform.position = itemLanes[lane - 1].transform.position;
-                return;
+                return currentObject;
             }
         }
         Debug.Log("the inactiveItems and itemsOnTheBelt lists both do not contain any objects with the 'WallBehavior.cs' component: there are no coins in the game or the 'SpawnCoin' function doesn't work properly");
+        return null;
     }
 }
