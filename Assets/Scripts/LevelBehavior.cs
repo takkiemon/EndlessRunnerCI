@@ -6,6 +6,7 @@ public class LevelBehavior : MonoBehaviour
 {
     public ConveyorBeltBehavior belt;
     public ItemCatcherBehavior catcher;
+    public PlayerController player;
     
     // Start is called before the first frame update
     void Start()
