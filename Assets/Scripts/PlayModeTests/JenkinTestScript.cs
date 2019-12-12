@@ -18,8 +18,7 @@ namespace Tests
         {
             levelObject = Object.Instantiate(Resources.Load<GameObject>("Prefabs/Level"));
             level = levelObject.GetComponent<LevelBehavior>();
-            levelObject = Object.Instantiate(Resources.Load<GameObject>("Prefabs/Characters/Player"));
-            player = levelObject.GetComponent<PlayerController>();
+            player = level.player;
         }
 
         [TearDown]
