@@ -47,10 +47,8 @@ public class ConveyorBeltBehavior : MonoBehaviour
                 break;
             case 1:
                 return SpawnCoin(lane);
-                break;
             case 2:
                 return SpawnWall(lane);
-                break;
             default:
                 break;
         }

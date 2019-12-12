@@ -6,33 +6,54 @@ using UnityEngine.TestTools;
 
 namespace Tests
 {
-    public class NewTestScript
+    [TestFixture]
+    public class JenkinTestScript
     {
-        private LevelBehavior levelObject;
-        public GameObject levelPrefab;
-        // A Test behaves as an ordinary method
-        [Test]
-        public void NewTestScriptSimplePasses()
+        private LevelBehavior level;
+        private GameObject levelObject;
+
+        [SetUp]
+        public void Setup()
         {
+            levelObject = Object.Instantiate(Resources.Load<GameObject>("Prefabs/Level"));
+            level = levelObject.GetComponent<LevelBehavior>();
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            Object.Destroy(levelObject.gameObject);
+        }
+
+        [UnityTest]
+        public IEnumerator SimpleTestTest()
+        {
+            yield return new WaitForSeconds(0.1f);
+            Assert.Greater(1, 0);
+        }
+        
+        // A Test behaves as an ordinary method
+        [UnityTest]
+        public IEnumerator NothingIsNullOrEmpty()
+        {
+            Assert.IsNotNull(level);
+            Assert.IsNotNull(level.belt);
+            Assert.IsNotNull(level.belt.itemLanes);
+            Assert.GreaterOrEqual(level.belt.itemLanes.Length, 1);
+            Assert.GreaterOrEqual(level.belt.itemsOnTheBelt.Count + level.belt.inactiveItems.Count, 1);
+
             // Use the Assert class to test conditions
+            yield return true;
         }
 
         // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
         // `yield return null;` to skip a frame.
         [UnityTest]
-        public IEnumerator NewTestScriptWithEnumeratorPasses()
+        public IEnumerator DoesTheSpawnedObjectMoveOnTheBelt()
         {
-            //GameObject leveObject = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Prefabs/Level"));
-            //level = leveObject.GetComponent<LevelBehavior>();
-            levelObject = MonoBehaviour.Instantiate(levelPrefab).GetComponent<LevelBehavior>();
             // 3
-            levelObject.belt.SpawnSomething();
-            GameObject beltObject = levelObject.belt.SpawnSomething();
-            
-            if (beltObject == null)
-            {
-                yield return true;
-            }
+            level.belt.SpawnSomething();
+            GameObject beltObject = level.belt.SpawnSomething();
             // 4
             float initialZPos = beltObject.transform.position.z;
             // 5
@@ -40,16 +61,17 @@ namespace Tests
             // 6
             Assert.Less(beltObject.transform.position.z, initialZPos);
             // 7
-            Object.Destroy(levelObject.gameObject);
             // Use the Assert class to test conditions.
             // Use yield to skip a frame.
+            yield return null;
         }
 
+        [UnityTest]
         public IEnumerator DoesItSpawn()
         {
-            int prevObjectsOnBelt = levelObject.belt.itemsOnTheBelt.Count;
-            levelObject.belt.SpawnSomething();
-            Assert.Less(prevObjectsOnBelt, levelObject.belt.itemsOnTheBelt.Count);
+            int prevObjectsOnBelt = level.belt.itemsOnTheBelt.Count;
+            level.belt.SpawnSomething();
+            Assert.Greater(level.belt.itemsOnTheBelt.Count, prevObjectsOnBelt);
             yield return null;
         }
     }
