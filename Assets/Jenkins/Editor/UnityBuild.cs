@@ -50,7 +50,7 @@ public class UnityBuild
 		{ BuildTarget.StandaloneOSX,            new PlatformBuilds(BuildMacOS,   false) },
 		{ BuildTarget.Android,                  new PlatformBuilds(BuildAndroid, false) },
 		{ BuildTarget.iOS,                      new PlatformBuilds(BuildiOS,     false) },
-		{ BuildTarget.WebGL,                    new PlatformBuilds(BuildWebGL,   true) },
+		{ BuildTarget.WebGL,                    new PlatformBuilds(BuildWebGL,   false) },
 	};
 
 	private static readonly Dictionary<BuildTarget, PlatformSpecificBuildOptions> PlatformBuildOptions = new Dictionary<BuildTarget, PlatformSpecificBuildOptions>()
