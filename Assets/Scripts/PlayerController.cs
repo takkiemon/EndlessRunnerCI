@@ -69,6 +69,7 @@ public class PlayerController : MonoBehaviour
         if (lives <= 0)
         {
             Debug.Log("You are dead.");
+            Application.Quit();
         }
     }
 
