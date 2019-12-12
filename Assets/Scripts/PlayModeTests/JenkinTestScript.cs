@@ -9,17 +9,14 @@ namespace Tests
     [TestFixture]
     public class JenkinTestScript
     {
-        private GameObject levelObject;
         private LevelBehavior level;
-        private PlayerController player;
+        private GameObject levelObject;
 
         [SetUp]
         public void Setup()
         {
             levelObject = Object.Instantiate(Resources.Load<GameObject>("Prefabs/Level"));
             level = levelObject.GetComponent<LevelBehavior>();
-            levelObject = Object.Instantiate(Resources.Load<GameObject>("Prefabs/Characters/Player"));
-            player = levelObject.GetComponent<PlayerController>();
         }
 
         [TearDown]
@@ -75,33 +72,6 @@ namespace Tests
             int prevObjectsOnBelt = level.belt.itemsOnTheBelt.Count;
             level.belt.SpawnSomething();
             Assert.Greater(level.belt.itemsOnTheBelt.Count, prevObjectsOnBelt);
-            yield return null;
-        }
-
-        [UnityTest]
-        public IEnumerator DoesThePlayerStartInTheMiddle()
-        {
-            Assert.AreEqual(2, player.currentLane);
-            yield return null;
-        }
-
-        [UnityTest]
-        public IEnumerator CanThePlayerMoveLeft()
-        {
-            player.FastSetThePlayerToLane(2);
-            yield return new WaitForSecondsRealtime(player.timeToMove);
-            player.PressLeft();
-            Assert.AreEqual(1, player.currentLane);
-            yield return null;
-        }
-
-        [UnityTest]
-        public IEnumerator CanThePlayerMoveRight()
-        {
-            player.FastSetThePlayerToLane(2);
-            yield return new WaitForSecondsRealtime(player.timeToMove);
-            player.PressRight();
-            Assert.AreEqual(3, player.currentLane);
             yield return null;
         }
     }

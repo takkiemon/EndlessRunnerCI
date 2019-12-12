@@ -23,8 +23,8 @@ public class PlayerController : MonoBehaviour
     {
         points = 0;
         lives = 3; 
+        currentLane = 2;
         moveTimer = 0f;
-        FastSetThePlayerToLane(2); // set the player to the middle lane
     }
 
     // Update is called once per frame
@@ -84,12 +84,6 @@ public class PlayerController : MonoBehaviour
         {
             UpdateLives(--lives);
         }
-    }
-
-    public void FastSetThePlayerToLane(int laneNumber)
-    {
-        currentLane = laneNumber;
-        transform.position = lanes[laneNumber - 1].transform.position;
     }
 
     public void PressLeft()
