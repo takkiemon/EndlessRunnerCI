@@ -27,13 +27,6 @@ namespace Tests
             Object.Destroy(levelObject.gameObject);
         }
 
-        [UnityTest]
-        public IEnumerator SimpleTestTest()
-        {
-            yield return new WaitForSeconds(0.1f);
-            Assert.Less(1, 0);
-        }
-        
         // A Test behaves as an ordinary method
         [UnityTest]
         public IEnumerator NothingIsNullOrEmpty()
