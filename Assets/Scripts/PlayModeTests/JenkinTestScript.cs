@@ -7,7 +7,7 @@ using UnityEngine.TestTools;
 namespace Tests
 {
     [TestFixture]
-    public class JenkinTestScript
+    public class JenkinTestScript // test 001
     {
         private GameObject levelObject;
         private LevelBehavior level;
