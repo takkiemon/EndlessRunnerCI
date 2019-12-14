@@ -83,6 +83,11 @@ namespace Tests
             player.FastSetThePlayerToLane(2);
             yield return new WaitForSecondsRealtime(player.timeToMove);
             player.PressLeft();
+            yield return new WaitForSecondsRealtime(player.timeToMove);
+            Assert.AreEqual(1, player.currentLane);
+            yield return new WaitForSecondsRealtime(player.timeToMove);
+            player.PressLeft(); // see if the player goes out of bounds
+            yield return new WaitForSecondsRealtime(player.timeToMove);
             Assert.AreEqual(1, player.currentLane);
             yield return null;
         }
@@ -93,6 +98,11 @@ namespace Tests
             player.FastSetThePlayerToLane(2);
             yield return new WaitForSecondsRealtime(player.timeToMove);
             player.PressRight();
+            yield return new WaitForSecondsRealtime(player.timeToMove);
+            Assert.AreEqual(3, player.currentLane);
+            yield return new WaitForSecondsRealtime(player.timeToMove);
+            player.PressRight(); // see if the player goes out of bounds
+            yield return new WaitForSecondsRealtime(player.timeToMove);
             Assert.AreEqual(3, player.currentLane);
             yield return null;
         }
