@@ -31,7 +31,7 @@ namespace Tests
         public IEnumerator SimpleTestTest()
         {
             yield return new WaitForSeconds(0.1f);
-            Assert.Greater(1, 0);
+            Assert.Less(1, 0);
         }
         
         // A Test behaves as an ordinary method
