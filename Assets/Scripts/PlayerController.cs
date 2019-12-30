@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour
         itemCatcher.RemoveItemFromConveyorBelt(other.gameObject);
         if (other.gameObject.GetComponent<CoinBehavior>())
         {
+            other.gameObject.GetComponent<CoinBehavior>().Jump(gameObject);
             UpdatePoints(++points);
         }
         if (other.gameObject.GetComponent<WallBehavior>())
