@@ -19,14 +19,18 @@ public class CoinBehavior : MonoBehaviour
     GameObject jumpTarget2;
     float jumpTimer;
     ItemCatcherBehavior itemCatcher;
+    public ParticleSystem shiniesSlow;
+    public ParticleSystem shiniesFast;
 
 
     // Start is called before the first frame update
-    void Start()
+    void Start() // create initilaize function and call it in here instead of setting the booleans in the start()
     {
         isJumping1 = false;
         isHangTime = false;
         isJumping2 = false;
+        shiniesFast.Stop();
+        shiniesSlow.Play();
     }
 
     // Update is called once per frame
@@ -72,6 +76,9 @@ public class CoinBehavior : MonoBehaviour
         jumpTimer = 0f;
         jumpTarget1 = jumpFrom + new Vector3(0f, jumpHeight, 0f);
         jumpTarget2 = jumpTargetLocation;
+
+        shiniesFast.Play();
+        shiniesSlow.Stop();
     }
 
     public void HangTime()
