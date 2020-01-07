@@ -75,14 +75,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        itemCatcher.RemoveItemFromConveyorBelt(other.gameObject);
-        if (other.gameObject.GetComponent<CoinBehavior>())
+        if (other.gameObject.GetComponent<CoinBehavior>() && !other.gameObject.GetComponent<CoinBehavior>().isJumping1 && !other.gameObject.GetComponent<CoinBehavior>().isJumping2)
         {
-            other.gameObject.GetComponent<CoinBehavior>().Jump(gameObject);
+            other.gameObject.GetComponent<CoinBehavior>().Jump(gameObject, itemCatcher);
             UpdatePoints(++points);
         }
         if (other.gameObject.GetComponent<WallBehavior>())
         {
+            itemCatcher.RemoveItemFromConveyorBelt(other.gameObject);
             UpdateLives(--lives);
         }
     }

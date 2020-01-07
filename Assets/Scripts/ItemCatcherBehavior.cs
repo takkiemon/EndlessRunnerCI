@@ -20,16 +20,14 @@ public class ItemCatcherBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<CoinBehavior>())
-        {
-            Debug.Log("test002");
-            SuspendItemFromConveyorBelt(other.gameObject);
-        }
-        else
-        {
-            Debug.Log("test001");
+        //if (other.gameObject.GetComponent<CoinBehavior>())
+        //{
+            //SuspendItemFromConveyorBelt(other.gameObject);
+        //}
+        //else
+        //{
             RemoveItemFromConveyorBelt(other.gameObject);
-        }
+        //}
     }
 
     public void RemoveItemFromConveyorBelt(GameObject itemToRemove)
@@ -45,6 +43,7 @@ public class ItemCatcherBehavior : MonoBehaviour
         itemToRemove.transform.position = new Vector3(itemToRemove.transform.position.x, itemToRemove.transform.position.y + transform.localScale.y + transform.position.y + 2, itemToRemove.transform.position.z - transform.localScale.z + transform.position.z - 2);
     }
 
+    /*
     public void SuspendItemFromConveyorBelt(GameObject itemToSuspend) // same as RemoveItemFromConveyorBelt(), but doesn't change its position, so that it can animate (needs a better name, probably)
     {
         if (!conveyorBelt.inactiveItems.Contains(itemToSuspend))
@@ -56,4 +55,5 @@ public class ItemCatcherBehavior : MonoBehaviour
             conveyorBelt.itemsOnTheBelt.Remove(itemToSuspend);
         }
     }
+    */
 }

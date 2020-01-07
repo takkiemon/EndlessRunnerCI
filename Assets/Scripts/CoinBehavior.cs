@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class CoinBehavior : MonoBehaviour
 {
-    bool isJumping1;
-    bool isJumping2;
+    public bool isJumping1;
+    public bool isJumping2;
     public float jumpHeight;
     public float jumpDuration1; // how long it takes to jump from the ground to the target (in seconds)
     public float jumpDuration2;
     Vector3 jumpFrom;
-    GameObject jumpTarget;
+    Vector3 jumpTarget1;
+    GameObject jumpTarget2;
     float jumpTimer;
+    ItemCatcherBehavior itemCatcher;
 
 
     // Start is called before the first frame update
@@ -25,8 +27,9 @@ public class CoinBehavior : MonoBehaviour
     {
         if (isJumping1)
         {
-            transform.position = Vector3.Lerp(jumpFrom, jumpFrom + new Vector3(0f, jumpHeight, 0f), jumpTimer);
+            transform.position = Vector3.Lerp(jumpFrom, jumpTarget1, jumpTimer);
             jumpTimer += Time.deltaTime / jumpDuration1;
+
             if (jumpTimer >= 1f)
             {
                 Jump2();
@@ -35,18 +38,25 @@ public class CoinBehavior : MonoBehaviour
 
         if (isJumping2)
         {
-            transform.position = Vector3.Lerp(jumpFrom, jumpTarget.transform.position, jumpTimer);
+            transform.position = Vector3.Lerp(jumpTarget1, jumpTarget2.transform.position, jumpTimer);
             jumpTimer += Time.deltaTime / jumpDuration2;
+            if (jumpTimer >= 1f)
+            {
+                itemCatcher.RemoveItemFromConveyorBelt(this.gameObject);
+                isJumping2 = false;
+            }
         }
     }
 
-    public void Jump(GameObject jumpTargetLocation)
+    public void Jump(GameObject jumpTargetLocation, ItemCatcherBehavior itemCatcher)
     {
+        jumpFrom = transform.position;
+        this.itemCatcher = itemCatcher;
         isJumping1 = true;
         isJumping2 = false;
         jumpTimer = 0f;
-        jumpTarget = jumpTargetLocation;
-        jumpFrom = transform.position;
+        jumpTarget1 = jumpFrom + new Vector3(0f, jumpHeight, 0f);
+        jumpTarget2 = jumpTargetLocation;
     }
 
     public void Jump2()

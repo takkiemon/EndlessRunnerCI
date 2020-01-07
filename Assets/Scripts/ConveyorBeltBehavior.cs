@@ -39,7 +39,7 @@ public class ConveyorBeltBehavior : MonoBehaviour
             spawnNumber = 2;
         }
 
-        int lane = Random.Range(1, 3);
+        int lane = Random.Range(1, 4);
         switch(spawnNumber)
         {
             case 0:
