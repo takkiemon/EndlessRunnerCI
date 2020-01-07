@@ -108,11 +108,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2425da00a339c7438d1402725b798df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isJumping1: 0
-  isJumping2: 0
+  isPickedUp: 0
   jumpHeight: 5
   jumpDuration1: 0.4
   jumpDuration2: 0.3
+  hangTimeDuration: 0.3
+  spinningSpeed1: 6000
+  spinningSpeed2: 400
 --- !u!54 &4321876910877988977
 Rigidbody:
   m_ObjectHideFlags: 0
