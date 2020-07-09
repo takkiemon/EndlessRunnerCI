@@ -15,4 +15,9 @@ public class WallBehavior : MonoBehaviour
     {
         
     }
+
+    public void Break()
+    {
+
+    }
 }

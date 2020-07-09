@@ -76,7 +76,7 @@ public class CoinBehavior : MonoBehaviour
         jumpTimer = 0f;
         jumpTarget1 = jumpFrom + new Vector3(0f, jumpHeight, 0f);
         jumpTarget2 = jumpTargetLocation;
-
+        //shiniesFast.emissionRate = 1000f;
         shiniesFast.Play();
         shiniesSlow.Stop();
     }
